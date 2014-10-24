@@ -12,7 +12,7 @@ makeCacheMatrix <- function(x = matrix()) {
     i <- NULL ## intializing the variable which holds inverse to null
     
     set <- function(y) {
-        x <<- y
+        x <<- as.matrix(y)
         i <<- NULL
     } ## set assigns the value of the new matrix to x
     
@@ -46,9 +46,9 @@ cacheSolve <- function(x, ...) {
     
     data <- x$get() ## To read the matrix assigned  
     
-    i <- solve(x) %*% x ## Calculates inverse of the matrix
+    i <- solve(t(data)) ## Calculates inverse of the matrix
     
-    x$setinverse ## To assign calcualted value of inverse to cache
+    x$setinverse(i) ## To assign calcualted value of inverse to cache
     
     return(i) ## Return a matrix that is the inverse of 'x'
 }
